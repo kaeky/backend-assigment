@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Problem, ProblemDocument } from '../models/problem.model';
+import { CreateProblemsDto } from './dto/createProblems.dto';
 
 @Injectable()
 export class ProblemsService {
@@ -10,10 +11,9 @@ export class ProblemsService {
   ) {}
 
   // Implementa aquí los métodos para crear, obtener, actualizar problemas, etc.
-  async createProblem(title: string, description: string) {
-    const newProblem = new this.problemModel({ title, description });
+  async createProblem(data: CreateProblemsDto): Promise<Problem> {
+    const newProblem = new this.problemModel(data);
     await newProblem.save();
-    console.log('Documento guardado en la base de datos:', newProblem);
     return newProblem;
   }
 }

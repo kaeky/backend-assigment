@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get } from '@nestjs/common';
 import { ProblemsService } from './problems.service';
+import { CreateProblemsDto } from './dto/createProblems.dto';
 
 @Controller('problems')
 export class ProblemsController {
@@ -7,7 +8,7 @@ export class ProblemsController {
 
   // Implementa aquí las rutas y métodos correspondientes
   @Get()
-  getAllProblems() {
-    return this.problemsService.createProblem('title', 'description');
+  reportProblem(@Body() data: CreateProblemsDto) {
+    return this.problemsService.createProblem(data);
   }
 }
