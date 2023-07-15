@@ -83,7 +83,7 @@ Para el correcto funcionamiento de la aplicación se deben definir las siguiente
 | DATABASE_USER     | docRed              | URI de la base de datos                   |           
 | DATABASE_PASSWORD | ifUZE3zDSGU2sEZR    | Sincronizar entidades en la base de datos |
 
-### Configuración de variables de entorno
+### configuracion de variables de entorno
 
 En la raíz del proyecto se encuentra el archivo **.env.example** el cual se debe duplicar o copiar en un archivo nuevo
 que se debe llamar **.env**
