@@ -21,6 +21,9 @@ export class AgentsService {
     return this.agentModel.find({ busy: false }).exec();
   }
 
+  async getAllAgents(): Promise<Agent[]> {
+    return this.agentModel.find().exec();
+  }
   async setAgentStatus(agentId: string, busy: boolean): Promise<Agent> {
     const agent = await this.agentModel.findById(agentId).exec();
 
@@ -34,12 +37,11 @@ export class AgentsService {
         .exec();
       if (problem) {
         problem.resolved = true;
-        problem.save();
+        await problem.save();
         agent.currentProblem = null;
       }
     }
-    await agent.save();
-    return;
+    return agent.save();
   }
   async assignAgent(agentId: string, pendingProblem: string): Promise<Agent> {
     const agent = await this.agentModel.findById(agentId).exec();

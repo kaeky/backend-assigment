@@ -58,4 +58,10 @@ export class ProblemsService {
     problem.assignedTo = agentId;
     return problem.save();
   }
+  async getProblems(): Promise<Problem[]> {
+    return this.problemModel.find().exec();
+  }
+  async getPendingProblems(): Promise<PendingProblem[]> {
+    return this.pendingProblemModel.find().exec();
+  }
 }
