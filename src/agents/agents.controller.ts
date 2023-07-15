@@ -12,7 +12,7 @@ export class AgentsController {
     return this.agentsService.createAgent(createAgentDto.name);
   }
 
-  @Post('status/:agentId')
+  @Post(':agentId')
   setAgentStatus(
     @Body() updateAgentDto: UpdateAgentDto,
     @Param('agentId') agentId: string,

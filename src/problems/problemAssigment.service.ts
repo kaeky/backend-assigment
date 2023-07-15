@@ -22,18 +22,21 @@ export class ProblemAssignmentService implements OnModuleInit {
     this.assignPendingProblems();
   }
 
-  @Cron('0 * * * * *') // Ejecutar cada minuto, ajusta el cron según tus necesidades
+  @Cron('* * * * * *') // Run every second
   async assignPendingProblems() {
+    console.log('Assigning pending problems');
     const availableAgents = await this.agentsService.getAvailableAgents();
     const pendingProblems = await this.pendingProblemModel.find().exec();
 
     for (const pendingProblem of pendingProblems) {
+      console.log(`Assigning problem ${pendingProblem.problemId} to agent`);
       if (availableAgents.length === 0) {
+        console.log('No hay agentes disponibles');
         break;
       }
 
       const agent = availableAgents.shift();
-      await this.agentsService.assignAgent(agent._id);
+      await this.agentsService.assignAgent(agent._id, pendingProblem.problemId);
 
       await this.problemsService.assignProblemToAgent(
         pendingProblem.problemId,

@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseConfigModule } from './config/mongoose.module';
 import { ProblemsModule } from './problems';
 import { AgentsModule } from './agents/agents.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AgentsModule } from './agents/agents.module';
     MongooseConfigModule,
     ProblemsModule,
     AgentsModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -8,6 +8,8 @@ export class Agent {
   readonly _id: string;
   @Prop()
   name: string;
+  @Prop()
+  currentProblem: string;
 
   @Prop({ default: false })
   busy: boolean;
