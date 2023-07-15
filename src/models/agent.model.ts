@@ -5,6 +5,7 @@ export type AgentDocument = Agent & Document;
 
 @Schema()
 export class Agent {
+  readonly _id: string;
   @Prop()
   name: string;
 

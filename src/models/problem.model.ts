@@ -11,6 +11,9 @@ export class Problem {
   @Prop({ required: true })
   description: string;
 
+  @Prop()
+  assignedTo: string;
+
   @Prop({ default: false })
   resolved: boolean;
 }

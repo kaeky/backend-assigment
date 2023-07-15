@@ -28,4 +28,14 @@ export class AgentsService {
     agent.busy = busy;
     return agent.save();
   }
+  async assignAgent(agentId: string): Promise<Agent> {
+    const agent = await this.agentModel.findById(agentId).exec();
+
+    if (!agent) {
+      throw new Error('Agent not found');
+    }
+
+    agent.busy = true;
+    return agent.save();
+  }
 }
