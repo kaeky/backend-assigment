@@ -4,8 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseConfigModule } from './config/mongoose.module';
 import { ProblemsModule } from './problems';
-import { MongooseModule } from '@nestjs/mongoose';
-import { Problem, ProblemSchema } from './models/problem.model';
+import { AgentsModule } from './agents/agents.module';
 
 @Module({
   imports: [
@@ -13,8 +12,8 @@ import { Problem, ProblemSchema } from './models/problem.model';
       envFilePath: '.env',
     }),
     MongooseConfigModule,
-    MongooseModule.forFeature([{ name: Problem.name, schema: ProblemSchema }]),
     ProblemsModule,
+    AgentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

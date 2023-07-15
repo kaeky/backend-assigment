@@ -1,6 +1,7 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Param } from '@nestjs/common';
 import { AgentsService } from './agents.service';
 import { CreateAgentDto } from './dto/createAgent.dto';
+import { UpdateAgentDto } from './dto/updateAgent.dto';
 
 @Controller('agents')
 export class AgentsController {
@@ -9,5 +10,13 @@ export class AgentsController {
   @Post()
   createAgent(@Body() createAgentDto: CreateAgentDto) {
     return this.agentsService.createAgent(createAgentDto.name);
+  }
+
+  @Post('status/:agentId')
+  setAgentStatus(
+    @Body() updateAgentDto: UpdateAgentDto,
+    @Param('agentId') agentId: string,
+  ) {
+    return this.agentsService.setAgentStatus(agentId, updateAgentDto.busy);
   }
 }
