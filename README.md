@@ -120,5 +120,5 @@ Para acceder a la documentación se debe ingresar a la url **http://localhost:PO
 > Reemplazar "**PORT**" por el valor de la variable de entorno **PORT**
 
 importar la
-colección en postman: Click on import button on postman and copy paste this link 
-https://app.postman.com/collections/6645999-4c5e9cf5-b877-422a-a507-ab446b9a4cf0?access_key=PMAT-01H5DPTK7DCSZP14Y4N9QJ6W9X)
+colección en postman: Click on import button on postman and copy paste this link
+https://api.postman.com/collections/6645999-4c5e9cf5-b877-422a-a507-ab446b9a4cf0?access_key=PMAT-01H5DPTK7DCSZP14Y4N9QJ6W9X
