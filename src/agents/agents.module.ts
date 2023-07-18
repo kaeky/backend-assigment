@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AgentsController } from './agents.controller';
+import { AgentsResolver } from './agents.resolver';
 import { AgentsService } from './agents.service';
 import { Agent, AgentSchema } from '../models/agent.model';
 import { Problem, ProblemSchema } from '../models/problem.model';
@@ -13,6 +13,6 @@ import { Problem, ProblemSchema } from '../models/problem.model';
     ]),
   ],
   controllers: [],
-  providers: [AgentsService, AgentsController],
+  providers: [AgentsService, AgentsResolver],
 })
 export class AgentsModule {}

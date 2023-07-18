@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AgentsController } from './agents.controller';
+import { AgentsResolver } from './agents.resolver';
 import { AgentsService } from './agents.service';
 import { CreateAgentDto } from './dto/createAgent.dto';
 import { UpdateAgentDto } from './dto/updateAgent.dto';
@@ -10,7 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Problem, ProblemSchema } from '../models/problem.model';
 
 describe('AgentsController', () => {
-  let controller: AgentsController;
+  let controller: AgentsResolver;
   let service: AgentsService;
 
   beforeEach(async () => {
@@ -25,11 +25,11 @@ describe('AgentsController', () => {
           { name: Problem.name, schema: ProblemSchema },
         ]),
       ],
-      controllers: [AgentsController],
+      controllers: [AgentsResolver],
       providers: [AgentsService],
     }).compile();
 
-    controller = module.get<AgentsController>(AgentsController);
+    controller = module.get<AgentsResolver>(AgentsResolver);
     service = module.get<AgentsService>(AgentsService);
   });
 
@@ -46,7 +46,7 @@ describe('AgentsController', () => {
     });
   });
 
-  describe('getAgents', () => {
+  describe('getAvailableAgents', () => {
     it('should return available agents', async () => {
       const result: Agent[] = [
         { _id: '1', name: 'Agent 1', currentProblem: 'Problem 1', busy: false },
@@ -54,7 +54,7 @@ describe('AgentsController', () => {
       ];
       jest.spyOn(service, 'getAvailableAgents').mockResolvedValue(result);
 
-      expect(await controller.getAgents()).toBe(result);
+      expect(await controller.getAvailableAgents()).toBe(result);
       expect(service.getAvailableAgents).toHaveBeenCalled();
     });
   });
@@ -69,7 +69,6 @@ describe('AgentsController', () => {
         busy: false,
       };
       jest.spyOn(service, 'createAgent').mockResolvedValue(result);
-
       expect(await controller.createAgent(createAgentDto)).toBe(result);
       expect(service.createAgent).toHaveBeenCalledWith(createAgentDto.name);
     });
@@ -90,7 +89,7 @@ describe('AgentsController', () => {
       };
       jest.spyOn(service, 'setAgentStatus').mockResolvedValue(result);
 
-      expect(await controller.setAgentStatus(updateAgentDto, agentId)).toBe(
+      expect(await controller.setAgentStatus(agentId, updateAgentDto)).toBe(
         result,
       );
       expect(service.setAgentStatus).toHaveBeenCalledWith(

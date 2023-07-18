@@ -5,7 +5,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Agent } from '../models/agent.model';
 
 @Resolver()
-export class AgentsController {
+export class AgentsResolver {
   constructor(private readonly agentsService: AgentsService) {}
 
   @Query(() => [Agent])
