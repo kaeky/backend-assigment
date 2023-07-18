@@ -1,14 +1,15 @@
 import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateAgentDto } from './createAgent.dto';
+import { Field, InputType, PartialType } from '@nestjs/graphql';
 
-export class UpdateAgentDto extends PartialType(CreateAgentDto) {
-  @ApiProperty({ default: false })
+@InputType()
+export class UpdateAgentDto extends PartialType(CreateAgentDto, InputType) {
+  @Field()
   @IsNotEmpty()
   @IsBoolean()
   busy: boolean;
 
-  @ApiProperty()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   currentProblem: string | null;

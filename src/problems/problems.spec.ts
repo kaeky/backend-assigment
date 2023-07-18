@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ProblemsController } from './problems.controller';
+import { ProblemsResolver } from './problems.resolver';
 import { ProblemsService } from './problems.service';
 import { CreateProblemsDto } from './dto/createProblems.dto';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -13,7 +13,7 @@ import { MongooseConfigModule } from '../config/mongoose.module';
 import { ConfigModule } from '@nestjs/config';
 
 describe('ProblemsController', () => {
-  let controller: ProblemsController;
+  let controller: ProblemsResolver;
   let service: ProblemsService;
 
   beforeEach(async () => {
@@ -29,11 +29,11 @@ describe('ProblemsController', () => {
           { name: PendingProblem.name, schema: PendingProblemSchema },
         ]),
       ],
-      controllers: [ProblemsController],
+      controllers: [ProblemsResolver],
       providers: [ProblemsService],
     }).compile();
 
-    controller = module.get<ProblemsController>(ProblemsController);
+    controller = module.get<ProblemsResolver>(ProblemsResolver);
     service = module.get<ProblemsService>(ProblemsService);
   });
 

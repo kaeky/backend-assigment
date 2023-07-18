@@ -1,8 +1,9 @@
 import { IsNotEmpty, IsString } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, InputType } from '@nestjs/graphql';
 
+@InputType()
 export class CreateAgentDto {
-  @ApiProperty()
+  @Field()
   @IsNotEmpty()
   @IsString()
   name: string;

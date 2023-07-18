@@ -1,23 +1,24 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 export type AgentDocument = Agent & Document;
 
 @Schema()
+@ObjectType()
 export class Agent {
-  @ApiProperty()
+  @Field()
   readonly _id: string;
 
-  @ApiProperty()
+  @Field()
   @Prop()
   name: string;
 
-  @ApiProperty()
-  @Prop()
+  @Field({ nullable: true })
+  @Prop({ default: null })
   currentProblem: string;
 
-  @ApiProperty()
+  @Field()
   @Prop({ default: false })
   busy: boolean;
 }

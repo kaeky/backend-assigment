@@ -1,24 +1,25 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 export type ProblemDocument = Problem & Document;
 
 @Schema()
+@ObjectType()
 export class Problem {
-  @ApiProperty({ example: 'Problem Title' })
+  @Field()
   @Prop({ required: true })
   title: string;
 
-  @ApiProperty({ example: 'Problem Description' })
+  @Field()
   @Prop({ required: true })
   description: string;
 
-  @ApiProperty({ example: 'Assigned Agent ID' })
-  @Prop()
+  @Field({ nullable: true })
+  @Prop({ default: null })
   assignedTo: string;
 
-  @ApiProperty({ example: false })
+  @Field()
   @Prop({ default: false })
   resolved: boolean;
 }

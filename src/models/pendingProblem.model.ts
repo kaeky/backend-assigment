@@ -1,15 +1,13 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 export type PendingProblemDocument = PendingProblem & Document;
 
 @Schema()
+@ObjectType()
 export class PendingProblem {
-  @ApiProperty({
-    description: 'The ID of the problem',
-    required: true,
-  })
+  @Field()
   @Prop({ required: true })
   problemId: string;
 }

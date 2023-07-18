@@ -1,52 +1,35 @@
-import { Controller, Post, Body, Param, Get } from '@nestjs/common';
 import { AgentsService } from './agents.service';
 import { CreateAgentDto } from './dto/createAgent.dto';
 import { UpdateAgentDto } from './dto/updateAgent.dto';
-import {
-  ApiTags,
-  ApiResponse,
-  ApiOperation,
-  ApiParam,
-  ApiBody,
-} from '@nestjs/swagger';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Agent } from '../models/agent.model';
 
-@ApiTags('agents')
-@Controller('agents')
+@Resolver()
 export class AgentsController {
   constructor(private readonly agentsService: AgentsService) {}
 
-  @ApiOperation({ summary: 'Get all agents' })
-  @ApiResponse({ status: 200, description: 'OK', type: Agent })
-  @Get('all')
+  @Query(() => [Agent])
   getAllAgents() {
     return this.agentsService.getAllAgents();
   }
 
-  @ApiOperation({ summary: 'Get available agents' })
-  @ApiResponse({ status: 200, description: 'OK', type: Agent })
-  @Get()
-  getAgents() {
+  @Query(() => [Agent])
+  getAvailableAgents() {
     return this.agentsService.getAvailableAgents();
   }
 
-  @ApiOperation({ summary: 'Create a new agent' })
-  @ApiBody({ type: CreateAgentDto })
-  @ApiResponse({ status: 201, description: 'Created', type: Agent })
-  @Post()
-  createAgent(@Body() createAgentDto: CreateAgentDto) {
+  @Mutation(() => Agent)
+  createAgent(
+    @Args('data', { type: () => CreateAgentDto })
+    createAgentDto: CreateAgentDto,
+  ) {
     return this.agentsService.createAgent(createAgentDto.name);
   }
-
-  @ApiOperation({ summary: 'Set agent status' })
-  @ApiParam({ name: 'agentId', type: 'string' })
-  @ApiBody({ type: UpdateAgentDto })
-  @ApiResponse({ status: 200, description: 'OK', type: Agent })
-  @Post(':agentId')
+  @Mutation(() => Agent)
   setAgentStatus(
-    @Body() updateAgentDto: UpdateAgentDto,
-    @Param('agentId') agentId: string,
+    @Args('agentId') agentId: string,
+    @Args('data', { type: () => UpdateAgentDto }) data: UpdateAgentDto,
   ) {
-    return this.agentsService.setAgentStatus(agentId, updateAgentDto.busy);
+    return this.agentsService.setAgentStatus(agentId, data.busy);
   }
 }

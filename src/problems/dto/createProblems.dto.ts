@@ -1,13 +1,14 @@
 import { IsNotEmpty, IsString } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { Field, InputType } from '@nestjs/graphql';
 
+@InputType()
 export class CreateProblemsDto {
-  @ApiProperty()
+  @Field()
   @IsNotEmpty()
   @IsString()
   readonly title: string;
 
-  @ApiProperty()
+  @Field()
   @IsNotEmpty()
   @IsString()
   readonly description: string;

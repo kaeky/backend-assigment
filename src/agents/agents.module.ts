@@ -12,7 +12,7 @@ import { Problem, ProblemSchema } from '../models/problem.model';
       { name: Problem.name, schema: ProblemSchema },
     ]),
   ],
-  controllers: [AgentsController],
-  providers: [AgentsService],
+  controllers: [],
+  providers: [AgentsService, AgentsController],
 })
 export class AgentsModule {}

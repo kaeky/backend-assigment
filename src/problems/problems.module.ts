@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Problem, ProblemSchema } from '../models/problem.model';
-import { ProblemsController } from './problems.controller';
+import { ProblemsResolver } from './problems.resolver';
 import { ProblemsService } from './problems.service';
 import { Agent, AgentSchema } from '../models/agent.model';
 import {
@@ -19,7 +19,12 @@ import { AgentsService } from '../agents/agents.service';
       { name: PendingProblem.name, schema: PendingProblemSchema },
     ]),
   ],
-  controllers: [ProblemsController],
-  providers: [AgentsService, ProblemsService, ProblemAssignmentService],
+  controllers: [],
+  providers: [
+    AgentsService,
+    ProblemsService,
+    ProblemAssignmentService,
+    ProblemsResolver,
+  ],
 })
 export class ProblemsModule {}
