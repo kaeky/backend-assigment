@@ -111,11 +111,6 @@ Ejecutar `yarn run start` en la terminal para iniciar la aplicación.
 
 Ejecutar `yarn run test` en la terminal para ejecutar las pruebas unitarias.
 
-## Documentación
-
-La aplicación se encuentra documentada con [Swagger](https://swagger.io/).
-Para acceder a la documentación se debe ingresar a la url **http://localhost:PORT/documentation**
-
 > 🚧 Nota
 >
 > Reemplazar "**PORT**" por el valor de la variable de entorno **PORT**
